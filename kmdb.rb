@@ -129,18 +129,16 @@ values = { name: "Anne Hathaway"}
 person = Person.new(values)
 person.save
 
-director = Person.where({ name: "Christopher Nolan"})[0]
-
 # Inserts data into Movies table
-values = { title: "Batman Begins", year_released: "2005", rated: "PG-13", person_id: director.id}
+values = { title: "Batman Begins", year_released: "2005", rated: "PG-13", person_id: Person.where({ name: "Christopher Nolan"})[0].id}
 movie = Movie.new(values)
 movie.save
 
-values = { title: "The Dark Knight", year_released: "2008", rated: "PG-13", person_id: director.id}
+values = { title: "The Dark Knight", year_released: "2008", rated: "PG-13", person_id: Person.where({ name: "Christopher Nolan"})[0].id}
 movie = Movie.new(values)
 movie.save
 
-values = { title: "The Dark Knight Rises", year_released: "2012", rated: "PG-13", person_id: director.id}
+values = { title: "The Dark Knight Rises", year_released: "2012", rated: "PG-13", person_id: Person.where({ name: "Christopher Nolan"})[0].id}
 movie = Movie.new(values)
 movie.save
 
@@ -217,9 +215,8 @@ puts ""
 # TODO!
 movies = Movie.all
 for movie in movies
-    puts "#{movie.title} #{movie.year_released} #{movie.rated} #{movie.person_id}"
+    puts "#{movie.title} - #{movie.year_released} - #{movie.rated} - #{movie.person.name}"
 end
-
 
 # Prints a header for the cast output
 puts ""
@@ -229,3 +226,9 @@ puts ""
 
 # Query the cast data and loop through the results to display the cast output for each movie
 # TODO!
+roles = Role.all
+for role in roles
+    puts "#{role.movie.title} - #{role.person.name} - #{role.character_name}"
+end
+
+    
